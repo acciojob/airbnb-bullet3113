@@ -4,6 +4,9 @@ import com.driver.model.Booking;
 import com.driver.model.Facility;
 import com.driver.model.Hotel;
 import com.driver.model.User;
+import com.driver.service.HotelService;
+import com.driver.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +24,12 @@ import java.util.UUID;
 @RequestMapping("/hotel")
 public class HotelManagementController {
 
+    @Autowired
+    HotelService hotelService;
+
+    @Autowired
+    UserService userService;
+
     @PostMapping("/add-hotel")
     public String addHotel(@RequestBody Hotel hotel){
 
@@ -29,8 +38,9 @@ public class HotelManagementController {
         //Incase somebody is trying to add the duplicate hotelName return FAILURE
         //in all other cases return SUCCESS after successfully adding the hotel to the hotelDb.
 
+        return hotelService.addHotelById(hotel);
 
-        return null;
+//        return null;
     }
 
     @PostMapping("/add-user")
@@ -39,7 +49,9 @@ public class HotelManagementController {
         //You need to add a User Object to the database
         //Assume that user will always be a valid user and return the aadharCardNo of the user
 
-       return null;
+        userService.addUserById(user);
+        return user.getaadharCardNo();
+//       return null;
     }
 
     @GetMapping("/get-hotel-with-most-facilities")
