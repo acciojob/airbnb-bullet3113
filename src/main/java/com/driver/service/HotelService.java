@@ -14,4 +14,12 @@ public class HotelService {
     public String addHotelById(Hotel h) {
         return hotelRepo.addHotelById(h);
     }
+
+    public Hotel getHotelById(String id) {
+        return hotelRepo.getHotelById(id);
+    }
+
+    public String getHotelWithMostFacilities() {
+        return hotelRepo.getHotelWithMostFacilities();
+    }
 }

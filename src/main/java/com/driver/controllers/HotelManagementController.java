@@ -6,6 +6,9 @@ import com.driver.model.Hotel;
 import com.driver.model.User;
 import com.driver.service.HotelService;
 import com.driver.service.UserService;
+import org.apache.juli.logging.Log;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+
 
 @RestController
 @RequestMapping("/hotel")
@@ -30,6 +31,7 @@ public class HotelManagementController {
     @Autowired
     UserService userService;
 
+    Logger logger = LoggerFactory.getLogger(HotelManagementController.class);
     @PostMapping("/add-hotel")
     public String addHotel(@RequestBody Hotel hotel){
 
@@ -38,6 +40,7 @@ public class HotelManagementController {
         //Incase somebody is trying to add the duplicate hotelName return FAILURE
         //in all other cases return SUCCESS after successfully adding the hotel to the hotelDb.
 
+        logger.info(hotel.getFacilities().toString());
         return hotelService.addHotelById(hotel);
 
 //        return null;
@@ -54,6 +57,11 @@ public class HotelManagementController {
 //       return null;
     }
 
+    @GetMapping("/{hotelid}")
+    public Hotel getHotelById(@PathVariable String hotelid) {
+        return hotelService.getHotelById(hotelid);
+    }
+
     @GetMapping("/get-hotel-with-most-facilities")
     public String getHotelWithMostFacilities(){
 
@@ -61,7 +69,8 @@ public class HotelManagementController {
         //Incase there is a tie return the lexicographically smaller hotelName
         //Incase there is not even a single hotel with atleast 1 facility return "" (empty string)
 
-        return null;
+        return hotelService.getHotelWithMostFacilities();
+//        return null;
     }
 
     @PostMapping("/book-a-room")
