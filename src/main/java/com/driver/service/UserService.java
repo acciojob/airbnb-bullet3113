@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepo;
+    UserRepository userRepo = new UserRepository();
 
     public void addUserById(User u) {
         userRepo.addUserById(u);

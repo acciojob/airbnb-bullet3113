@@ -26,14 +26,9 @@ import java.util.*;
 @RequestMapping("/hotel")
 public class HotelManagementController {
 
-    @Autowired
-    HotelService hotelService;
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    BookingService bookingService;
+    HotelService hotelService = new HotelService();
+    UserService userService = new UserService();
+    BookingService bookingService = new BookingService();
 
     Logger logger = LoggerFactory.getLogger(HotelManagementController.class);
     @PostMapping("/add-hotel")

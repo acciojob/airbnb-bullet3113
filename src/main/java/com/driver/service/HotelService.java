@@ -13,8 +13,7 @@ import java.util.Set;
 @Service
 public class HotelService {
 
-    @Autowired
-    HotelRepository hotelRepo;
+    HotelRepository hotelRepo = new HotelRepository();
 
     public String addHotelById(Hotel h) {
         return hotelRepo.addHotelById(h);
