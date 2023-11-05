@@ -42,7 +42,7 @@ public class HotelRepository {
             return b.getFacilities().size() - a.getFacilities().size();
         });
 
-        if(hotelsWithFacilities.size() == 0) return null;
+        if(hotelsWithFacilities.size() == 0) return "";
 
         return hotelsWithFacilities.get(0).getHotelName();
     }
